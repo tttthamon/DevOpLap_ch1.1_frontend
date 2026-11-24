@@ -1,4 +1,3 @@
-```vue
 <template>
   <q-page padding>
     <div class="text-h4 q-mb-md">
@@ -22,7 +21,7 @@
       </q-card-section>
     </q-card>
 
-    <q-card>
+    <q-card class="q-mb-md">
       <q-card-section>
         <div class="text-h6">Docker Concepts (สรุปสั้น ๆ)</div>
         <q-list bordered separator class="q-mt-sm">
@@ -30,6 +29,22 @@
             <q-item-section>
               <q-item-label>{{ item.title }}</q-item-label>
               <q-item-label caption>{{ item.detail }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+    </q-card>
+
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">Docker Quick Reference (คำสั่งที่ใช้งานบ่อย)</div>
+        <q-list bordered separator class="q-mt-sm">
+          <q-item v-for="(cmd, index) in dockerCommands" :key="index">
+            <q-item-section>
+              <q-item-label class="text-weight-medium text-primary">
+                <code>{{ cmd.command }}</code>
+              </q-item-label>
+              <q-item-label caption>{{ cmd.detail }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -78,6 +93,29 @@ const dockerItems = [
   {
     title: 'Network',
     detail: 'ให้บริการใน Docker ติดต่อกันได้ เช่น Nginx ส่งต่อคำขอไปยัง Express',
+  },
+]
+
+const dockerCommands = [
+  {
+    command: 'docker compose up -d --build',
+    detail: 'ใช้เมื่อต้องการ build image ใหม่และรัน container ทั้งหมดในโปรเจกต์แบบทำงานเบื้องหลัง',
+  },
+  {
+    command: 'docker compose ps',
+    detail: 'ใช้เมื่อต้องการตรวจสอบสถานะของ container และ port ที่กำลังทำงานอยู่ในโปรเจกต์',
+  },
+  {
+    command: 'docker compose logs -f',
+    detail: 'ใช้เมื่อต้องการดู log การทำงานของ container แบบเรียลไทม์เพื่อช่วยไล่หาข้อผิดพลาด',
+  },
+  {
+    command: 'docker compose down',
+    detail: 'ใช้เมื่อต้องการหยุดการทำงานและลบ container รวมถึง network ของโปรเจกต์ออกทั้งหมด',
+  },
+  {
+    command: 'docker images',
+    detail: 'ใช้เมื่อต้องการดูรายการ Docker image ทั้งหมดที่มีอยู่ในเครื่อง',
   },
 ]
 </script>
